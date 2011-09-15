@@ -13,6 +13,7 @@ Usage
 
 * pip install (from here, for the moment): `pip install -e git://github.com/GoodCloud/django-zebra.git#egg=zebra`
 * Add to `INSTALLED_APPS`
+# Add `STRIPE_SECRET` and `STRIPE_PUBLISHABLE` to your `settings.py`
 * Enjoy.
 
 
