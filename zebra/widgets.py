@@ -1,4 +1,5 @@
 from django.forms.widgets import TextInput, Select
+from django.utils.safestring import mark_safe
 
 class NoNameWidget(object):
     
@@ -26,13 +27,13 @@ class NoNameTextInput(TextInput, NoNameWidget):
 
     def render(self, name, *args, **kwargs):
         kwargs = self._update_to_noname_class_name(name, kwargs)
-        return self._strip_name_attr(super(NoNameTextInput, self).render(name, *args, **kwargs), name)
+        return mark_safe(self._strip_name_attr(super(NoNameTextInput, self).render(name, *args, **kwargs), name))
 
 
 class NoNameSelect(Select, NoNameWidget):
     
     def render(self, name, *args, **kwargs):
         kwargs = self._update_to_noname_class_name(name, kwargs)
-        return self._strip_name_attr(super(NoNameSelect, self).render(name, *args, **kwargs), name)
+        return mark_safe(self._strip_name_attr(super(NoNameSelect, self).render(name, *args, **kwargs), name))
 
 
