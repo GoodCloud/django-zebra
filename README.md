@@ -18,9 +18,10 @@ Usage
 
 ## Forms ##
 
-The StripePaymentForm sets up a form like [this one](https://gist.github.com/1204718#file_stripe_tutorial_page.html).
+The StripePaymentForm sets up a form with fields like [the official stripe example](https://gist.github.com/1204718#file_stripe_tutorial_page.html).
 
 Use it in a view like so:
+
 ```
     if request.method == 'POST':
         zebra_form = StripePaymentForm(request.POST)
@@ -56,6 +57,7 @@ To use in a template:
 {% block content %}
 	{% zebra_card_form %}
 {% endblock %}
+
 ```
 
 That's it - all the stripe tokeny goodness happens, and errors are displayed (roughly) to your users.
