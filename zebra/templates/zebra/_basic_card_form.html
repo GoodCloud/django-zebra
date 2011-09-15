@@ -1,0 +1,5 @@
+<form action="" method="POST" id="payment-form">{% csrf_token %}
+	<span class="payment-errors"></span>
+	{{zebra_form.as_p}}
+    <button type="submit" class="submit-button">Submit Payment</button>
+</form>

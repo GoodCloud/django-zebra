@@ -1,0 +1,9 @@
+#id_card_number {
+	width: 15em;
+}
+#id_card_cvv {
+	width: 3em;
+}
+#id_card_expiry_year {
+	width: 6em;
+}

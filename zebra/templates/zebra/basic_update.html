@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load zebra_tags %}
+
+{% block head %}{{block.super}}
+	{% zebra_head_and_stripe_key %}
+{% endblock %}
+
+{% block content %}
+	{% zebra_card_form %}
+{% endblock %}

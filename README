@@ -1,0 +1,5 @@
+Zebra aims to be a simple set of django helper forms and widgets that make handling Stripe credit cards even easier.
+
+It includes a sample view and template, and pull requests are quite welcome!
+
+
