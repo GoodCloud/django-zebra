@@ -11,7 +11,7 @@ Usage
 
 ## Installation ##
 
-* pip install (from here, for the moment: `pip install -e git://git@github.com:GoodCloud/django-zebra.git#egg=zebra` )
+* pip install (from here, for the moment): `pip install -e git://github.com/GoodCloud/django-zebra.git#egg=zebra`
 * Add to `INSTALLED_APPS`
 * Enjoy.
 
