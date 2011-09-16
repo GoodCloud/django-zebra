@@ -24,6 +24,7 @@ class Command(BaseCommand):
 
             if verbosity > 1:     
                 print "Processing records %s-%s" % (num_checked, num_checked+len(customer_chunk))
+
             for c in customer_chunk:
                 if verbosity > 2:
                     print "Deleting %s..." % (c.description),
