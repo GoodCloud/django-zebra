@@ -11,15 +11,14 @@ $(function() {
 
       Stripe.createToken(card, function(status, response) {
         if (status === 200) {
-          console.log(status, response);
+          // console.log(status, response);
           $("#credit-card-errors").hide();
           $("#id_last_4_digits").val(response.card.last4);
           $("#id_stripe_token").val(response.id);
           form.submit();
 		  $("button[type=submit]").attr("disabled","disabled").html("Submitting..")
         } else {
-          $("#payment-errors").text(response.error.message);
-          $("#credit-card-errors").show();
+          $(".payment-errors").text(response.error.message);
           $("#user_submit").attr("disabled", false);
         }
       });
