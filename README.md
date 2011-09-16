@@ -64,6 +64,18 @@ To use in a template:
 That's it - all the stripe tokeny goodness happens, and errors are displayed (roughly) to your users.
 
 
+
+Other Useful Bits
+=================
+
+Zebra comes with a manage.py command to clear out all the test customers from your account.  To use it, run:
+
+```
+./manage.py clear_stripe_test_customers
+```
+
+
+
 Credits
 =======
 

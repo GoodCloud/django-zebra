@@ -1,0 +1,3 @@
+stripe
+django
+django-extensions
