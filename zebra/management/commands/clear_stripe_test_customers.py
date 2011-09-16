@@ -20,11 +20,10 @@ class Command(BaseCommand):
         
         num_checked = 0
         while customer_chunk is not []:
-            customer_chunk = stripe.Customer.all(count=CLEAR_CHUNK_SIZE).data
+            customer_chunk = stripe.Customer.all(count=CLEAR_CHUNK_SIZE, offset=num_checked).data
 
             if verbosity > 1:     
                 print "Processing records %s-%s" % (num_checked, num_checked+len(customer_chunk))
-            
             for c in customer_chunk:
                 if verbosity > 2:
                     print "Deleting %s..." % (c.description),

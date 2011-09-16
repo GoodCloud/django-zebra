@@ -65,8 +65,7 @@ That's it - all the stripe tokeny goodness happens, and errors are displayed (ro
 
 
 
-Other Useful Bits
-=================
+## Other Useful Bits ##
 
 Zebra comes with a manage.py command to clear out all the test customers from your account.  To use it, run:
 
@@ -74,6 +73,7 @@ Zebra comes with a manage.py command to clear out all the test customers from yo
 ./manage.py clear_stripe_test_customers
 ```
 
+It responds to `--verbosity=[0-3]`, like a lot of python scripts.
 
 
 Credits
