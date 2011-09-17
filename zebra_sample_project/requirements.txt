@@ -1,0 +1,6 @@
+pip > 1.0
+stripe
+django
+django-extensions
+# until it's stable.
+-e git://github.com/GoodCloud/django-zebra.git#egg=zebra

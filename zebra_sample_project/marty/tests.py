@@ -1,38 +1,38 @@
-from django.test import TestCase
-from django.conf import settings
+import unittest
+from zebra.conf import settings
 from django.test.client import Client
 from zebra.signals import *
+
 from django.core.urlresolvers import reverse
 
-class TestWebhooks(TestCase):
+class TestWebhooks(unittest.TestCase):
 
     def setUp(self):
         self.signal_kwargs = None
 
-    def signal_reciever(self, **kwargs):
+    def _signal_reciever(self, **kwargs):
         self.signal_kwargs = kwargs
 
     def test_recurring_payment_failed_signal_fired(self):
-        zebra_webhook_recurring_payment_succeeded.connect(self.signal_reciever)
-
+        zebra_webhook_recurring_payment_succeeded.connect(self._signal_reciever)
 
         self.assertEqual(self.signal_kwargs, None)
 
         # Pulled directly from the stripe docs
         test_post_data = {'json':{
           "customer":1083,
-          "livemode": true,
+          "livemode": True,
           "event": "recurring_payment_failed",
           "attempt": 2,
           "invoice": {
-            "attempted": true,
+            "attempted": True,
             "charge": "ch_sUmNHkMiag",
-            "closed": false,
+            "closed": False,
             "customer": "1083",
             "date": 1305525584,
             "id": "in_jN6A1g8N76",
             "object": "invoice",
-            "paid": true,
+            "paid": True,
             "period_end": 1305525584,
             "period_start": 1305525584,
             "subtotal": 2000,
@@ -62,7 +62,7 @@ class TestWebhooks(TestCase):
               "type": "Visa",
               "last4": "4242"
             },
-            "success": false
+            "success": False
           }
         } }
 
@@ -148,7 +148,7 @@ class TestWebhooks(TestCase):
         # recurring_payment_succeeded
             # {
             #   "customer":"1083",
-            #   "livemode": true,
+            #   "livemode": True,
             #   "event":"recurring_payment_succeeded",
             #   "invoice": {
             #     "total": 2000,
@@ -184,7 +184,7 @@ class TestWebhooks(TestCase):
             #       "type": "Visa",
             #       "last4": "4242"
             #     },
-            #     "success": true
+            #     "success": True
             #   }
             # }
      

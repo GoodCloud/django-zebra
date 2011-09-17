@@ -1,4 +1,4 @@
-from django.conf import settings
+from zebra.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
