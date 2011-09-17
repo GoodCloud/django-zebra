@@ -12,7 +12,7 @@ class DatesModelBase(models.Model):
         abstract = True
 
 
-class StripeCustomer(models.Model, mixins.StripeCustomerMixin):
+class StripeCustomer(DatesModelBase, mixins.StripeCustomerMixin):
     _sync_stripe = True
     customer_id = models.CharField(max_length=50)
     
