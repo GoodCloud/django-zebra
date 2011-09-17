@@ -1,9 +1,9 @@
 from django.conf import settings
 from django.core.management.base import BaseCommand
-from zebra import MAXIMUM_STRIPE_CUSTOMER_LIST_SIZE
+from zebra.conf import ZEBRA_MAXIMUM_STRIPE_CUSTOMER_LIST_SIZE
 import stripe
 
-CLEAR_CHUNK_SIZE = MAXIMUM_STRIPE_CUSTOMER_LIST_SIZE
+CLEAR_CHUNK_SIZE = ZEBRA_MAXIMUM_STRIPE_CUSTOMER_LIST_SIZE
 
 
 class Command(BaseCommand):
