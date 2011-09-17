@@ -3,6 +3,7 @@ Defualt settings for zebra
 """
 import datetime
 
+ZEBRA_ENABLE_APP = False
 ZEBRA_TODAY = datetime.date.today()
 ZEBRA_CARD_YEARS = range(ZEBRA_TODAY.year, ZEBRA_TODAY.year+10)
 ZEBRA_CARD_YEARS_CHOICES = [(i,i) for i in ZEBRA_CARD_YEARS]
