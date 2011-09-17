@@ -4,7 +4,8 @@ Defualt settings for zebra
 import datetime
 import os
 
-STRIPE_API_KEY = os.environ['STRIPE_API_KEY']
+STRIPE_PUBLISHABLE = os.environ['STRIPE_PUBLISHABLE']
+STRIPE_SECRET = os.environ['STRIPE_SECRET']
 ZEBRA_ENABLE_APP = False
 ZEBRA_TODAY = datetime.date.today()
 ZEBRA_CARD_YEARS = range(ZEBRA_TODAY.year, ZEBRA_TODAY.year+10)
