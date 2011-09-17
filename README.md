@@ -5,6 +5,11 @@ Zebra is a set of webhook handlers, forms and widgets that make using Stripe wit
 
 It includes a sample view and template, and pull requests are quite welcome!
 
+Status
+======
+
+In active dev this weekend ( Sept 19, 2011 ).  Probably don't use it in production until monday.  This message will go away when that's changed.
+
 
 Usage
 =====
@@ -29,6 +34,7 @@ Zebra provides handling of all the webhooks that stripe sends back, and calls a 
 
 
 Zebra provides:
+
 * `zebra_webhook_recurring_payment_failed`
 * `zebra_webhook_invoice_ready`
 * `zebra_webhook_recurring_payment_succeeded`
@@ -36,6 +42,7 @@ Zebra provides:
 * `zebra_webhook_subscription_final_payment_attempt_failed`
 
 All of the webhooks provide the same arguments:
+
 * `customer` - the Customer object
 * `full_json` - the full json response, parsed with simplejson.
 
