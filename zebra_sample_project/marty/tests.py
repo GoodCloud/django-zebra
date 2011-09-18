@@ -2,10 +2,7 @@ import unittest
 from django.conf import settings
 from django.test.client import Client
 from zebra.signals import *
-try:
-    import simplejson
-except:
-    from django.utils import simplejson
+from django.utils import simplejson
 
 
 from django.core.urlresolvers import reverse
