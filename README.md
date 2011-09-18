@@ -29,7 +29,7 @@ Usage
 Zebra provides handling of all the webhooks that stripe sends back, and calls a set of signals, so you can plug your app in as needed. To use the webhooks.
 
 * Include the zebra urls
-* Update your stripe account to point to your webhook URL (aka https://www.mysite.com/zebra-webhooks)
+* Update your stripe account to point to your webhook URL (aka https://www.mysite.com/zebra/webhooks)
 * Plug into any webhook signals you care about.  
 
 
@@ -125,6 +125,6 @@ Credits
 
 I did not write any of stripe.  It just makes me happy to use, and inspired to make better APIs for my users.  For Stripe info, ask them: [stripe.com](http://stripe.com)
 
-Initial coding by Steven Skoczen of [GoodCloud](http://www.agoodcloud.com).  Pull requests welcome!
+Code credits are in the AUTHORS file.   Pull requests welcome!
 
 
