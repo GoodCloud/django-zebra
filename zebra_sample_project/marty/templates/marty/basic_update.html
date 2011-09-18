@@ -1,7 +1,8 @@
-{% extends "base.html" %}
+{% extends "marty/base.html" %}
 {% load zebra_tags %}
 
 {% block head %}{{block.super}}
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 	{% zebra_head_and_stripe_key %}
 {% endblock %}
 

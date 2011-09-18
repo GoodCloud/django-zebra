@@ -7,7 +7,11 @@ SOURCE_DIR = os.path.join(ROOT_DIR)
 
 setup(
     name = "zebra",
-    version = "0.1",
+    description = "Library for Django and Stripe",
+    author = "Steven Skoczen",
+    author_email = "steven@agoodcloud.com",
+    url = "https://github.com/GoodCloud/django-zebra",
+    version = "0.2",
     packages = find_packages(),
     zip_safe = False,
 )

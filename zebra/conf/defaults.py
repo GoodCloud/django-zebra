@@ -1,5 +1,5 @@
 """
-Defualt settings for zebra
+Default settings for zebra
 """
 import datetime
 import os

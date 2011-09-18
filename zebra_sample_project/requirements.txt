@@ -1,0 +1,8 @@
+pip > 1.0
+pycurl
+stripe
+django
+django-extensions
+
+# we include it from the parent dir. You'll want to install it.
+# zebra

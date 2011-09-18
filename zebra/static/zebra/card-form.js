@@ -1,6 +1,6 @@
 $(function() {
   $("#id_card_number").parents("form").submit(function() {
-    if ( $("#id_card_number").is(":visible")) {
+  	if ( $("#id_card_number").is(":visible")) {
       var form = this;
       var card = {
         number:   $("#id_card_number").val(),

@@ -1,42 +1,42 @@
-from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
-import stripe
+from django.http import HttpResponse
+try:
+    import simplejson
+except:
+    from django.utils import simplejson
 
-from zebra.forms import StripePaymentForm
+from zebra.conf import settings
+import stripe
+from zebra.signals import *
 
 stripe.api_key = settings.STRIPE_SECRET
 
-# In a real implementation, do login required, etc.
-def edit(request):
-    user = request.user
-    success_updating = False
 
-    if request.method == 'POST':
-        zebra_form = StripePaymentForm(request.POST)
-        if zebra_form.is_valid():
+def webhooks(request):
+    """Handles all known webhooks from stripe, and calls signals. Plug in as you need."""
 
-            customer = stripe.Customer.retrieve(user.stripe_id)
-            customer.card = zebra_form.cleaned_data['stripe_token']
-            customer.save()
+    assert request.method == "POST"
+    json = simplejson.loads(request.POST["json"])
 
-            profile = user.get_profile()
-            profile.last_4_digits = zebra_form.cleaned_data['last_4_digits']
-            profile.stripe_customer_id = customer.id
-            profile.save()
+    if json["event"] == "recurring_payment_failed":
+        zebra_webhook_recurring_payment_failed.send(sender=None, customer=json["customer"], full_json=json)
 
-            success_updating = True
+    elif json["event"] == "invoice_ready":
+        zebra_webhook_invoice_ready.send(sender=None, customer=json["customer"], full_json=json)
 
+    elif json["event"] == "recurring_payment_succeeded":
+        zebra_webhook_recurring_payment_succeeded.send(sender=None, customer=json["customer"], full_json=json)
+
+    elif json["event"] == "subscription_trial_ending":
+        zebra_webhook_subscription_trial_ending.send(sender=None, customer=json["customer"], full_json=json)
+
+    elif json["event"] == "subscription_final_payment_attempt_failed":
+        zebra_webhook_subscription_final_payment_attempt_failed.send(sender=None, customer=json["customer"], full_json=json)
+    
     else:
-        zebra_form = StripePaymentForm()
+        return HttpResponse(status=400)
 
-    return render_to_response('basic_update.html',
-        {
-          'zebra_form': zebra_form,
-          'publishable': settings.STRIPE_PUBLISHABLE,
-          'success_updating': success_updating,
-        },
-        context_instance=RequestContext(request)
-    )
-
+    return HttpResponse(status=200)
+    

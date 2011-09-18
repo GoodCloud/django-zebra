@@ -1,6 +1,5 @@
-from django.conf import settings
 from django.core.management.base import BaseCommand
-from zebra.conf import ZEBRA_MAXIMUM_STRIPE_CUSTOMER_LIST_SIZE
+from zebra.conf import settings 
 import stripe
 
 CLEAR_CHUNK_SIZE = ZEBRA_MAXIMUM_STRIPE_CUSTOMER_LIST_SIZE
@@ -24,6 +23,7 @@ class Command(BaseCommand):
 
             if verbosity > 1:     
                 print "Processing records %s-%s" % (num_checked, num_checked+len(customer_chunk))
+
             for c in customer_chunk:
                 if verbosity > 2:
                     print "Deleting %s..." % (c.description),
