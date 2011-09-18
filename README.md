@@ -1,9 +1,14 @@
 Overview
 ========
 
-Zebra is a set of webhook handlers, forms and widgets that make using Stripe with Django even easier.
+Zebra is a library that makes using Stripe with Django even easier.
 
-It includes a sample view and template, and pull requests are quite welcome!
+It's made of:
+
+* `zebra`, the core library, with forms, webhook handlers, abstract models, signals, and templatetags that cover most stripe implementations.
+* `marty`, an example app for how to integrate zebra, that also serves as its test suite.
+
+Pull requests are quite welcome!
 
 Status
 ======
