@@ -38,6 +38,7 @@ Usage
 3. (optional) `./manage.py syncdb` if you have `ZEBRA_ENABLE_APP = True`
 
 4. (optional) Add in the webhook urls:
+
 	```
 	urlpatterns += patterns('',          
 		url(r'zebra/',   include('zebra.urls',  namespace="zebra",  app_name='zebra') ),
@@ -67,7 +68,7 @@ Zebra provides:
 
 All of the webhooks provide the same arguments:
 
-* `customer` - a Customer object
+* `customer` - the stripe customer ID
 * `full_json` - the full json response, parsed with simplejson.
 
 
