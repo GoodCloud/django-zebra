@@ -5,7 +5,7 @@ from zebra.conf import settings
 
 
 class StripeCustomer(models.Model, mixins.StripeMixin, mixins.StripeCustomerMixin):
-    stripe_customer_id = models.CharField(max_length=50)
+    stripe_customer_id = models.CharField(max_length=50, blank=True, null=True)
     
     class Meta:
         abstract = True
@@ -15,7 +15,7 @@ class StripeCustomer(models.Model, mixins.StripeMixin, mixins.StripeCustomerMixi
 
 
 class StripePlan(models.Model, mixins.StripeMixin, mixins.StripePlanMixin):
-    stripe_plan_id = models.CharField(max_length=50)
+    stripe_plan_id = models.CharField(max_length=50, blank=True, null=True)
     
     class Meta:
         abstract = True
