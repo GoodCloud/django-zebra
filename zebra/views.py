@@ -68,6 +68,9 @@ def webhooks(request):
 
     elif json["event"] == "subscription_final_payment_attempt_failed":
         zebra_webhook_subscription_final_payment_attempt_failed.send(sender=None, customer=json["customer"], full_json=json)
+    
+    else:
+        return HttpResponse(status=400)
 
     return HttpResponse(status=200)
     
