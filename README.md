@@ -5,7 +5,7 @@ Zebra is a library that makes using Stripe with Django even easier.
 
 It's made of:
 
-* `zebra`, the core library, with forms, webhook handlers, abstract models, signals, and templatetags that cover most stripe implementations.
+* `zebra`, the core library, with forms, webhook handlers, abstract models, mixins, signals, and templatetags that cover most stripe implementations.
 * `marty`, an example app for how to integrate zebra, that also serves as its test suite.
 
 Pull requests are quite welcome!
@@ -31,7 +31,7 @@ Usage
 
 ## Webhooks ##
 
-Zebra provides handling of all the webhooks that stripe sends back, and calls a set of signals, so you can plug your app in as needed. To use the webhooks.
+Zebra handling all the webhooks that stripe sends back and calls a set of signals that you can plug your app into.  To use the webhooks:
 
 * Include the zebra urls
 * Update your stripe account to point to your webhook URL (aka https://www.mysite.com/zebra/webhooks)
@@ -48,7 +48,7 @@ Zebra provides:
 
 All of the webhooks provide the same arguments:
 
-* `customer` - the Customer object
+* `customer` - a Customer object
 * `full_json` - the full json response, parsed with simplejson.
 
 
@@ -113,7 +113,11 @@ To use in a template:
 
 ```
 
-That's it - all the stripe tokeny goodness happens, and errors are displayed (roughly) to your users.
+That's it - all the stripe tokeny goodness happens, and errors are displayed to your users.
+
+## Models and Mixins ##
+
+Model and Mixin docs coming.
 
 
 ## Other Useful Bits ##
