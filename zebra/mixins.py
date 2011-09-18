@@ -38,11 +38,14 @@ class StripeMixin(object):
     Provides a property `stripe` that returns an instance of the Stripe module.
     
     It optionally supports the ability to set `stripe.api_key` if your class
-    has a `stripe_api_key` attribute (method or property).
+    has a `stripe_api_key` attribute (method or property), or if
+    settings has a `STRIPE_SECRET` attribute (method or property).
     """
     def _get_stripe(self):
         if hasattr(self, 'stripe_api_key'):
             stripe.api_key = _get_attr_value(self, 'stripe_api_key')
+        elif hasattr(settings, 'STRIPE_SECRET'):
+            stripe.api_key = _get_attr_value(settings, 'STRIPE_SECRET')
         return stripe
     stripe = property(_get_stripe)
 
