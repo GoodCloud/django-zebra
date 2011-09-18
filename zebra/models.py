@@ -12,16 +12,30 @@ class DatesModelBase(models.Model):
         abstract = True
 
 
-class StripeCustomer(DatesModelBase, mixins.StripeCustomerMixin):
-    _sync_stripe = True
+class StripeCustomer(models.Model, mixins.StripeCustomerMixin):
     customer_id = models.CharField(max_length=50)
     
     class Meta:
         abstract = True
     
+    @property
+    def stripe_customer_id(self):
+        return self.subscription_id
+
+
+class StripeSubscription(models.Model, mixins.StripeSubscriptionMixin):
+    subscription_id = models.CharField(max_length=50)
+    
+    class Meta:
+        abstract = True
+    
+    @property
+    def stripe_subscription_id(self):
+        return self.subscription_id
+    
 
 # Non abstract classes must be enabled in your project's settings.py
 if settings.ZEBRA_ENABLE_APP:
-    class Customer(StripeCustomer):
+    class Customer(DatesModelBase, StripeCustomer):
         pass
 
