@@ -38,4 +38,7 @@ class StripeSubscription(models.Model, mixins.StripeSubscriptionMixin):
 if settings.ZEBRA_ENABLE_APP:
     class Customer(DatesModelBase, StripeCustomer):
         pass
+    
+    class Subscription(DatesModelBase, StripeSubscription):
+        pass
 
