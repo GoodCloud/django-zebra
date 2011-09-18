@@ -21,7 +21,7 @@ Usage
 
 ## Installation ##
 
-1. `pip` install (from here, for the moment. pypi support coming with stability. ): 
+1. `pip` install (from here, for the moment. pypi support coming soon. ): 
 	`pip install -e git://github.com/GoodCloud/django-zebra.git#egg=zebra`
 
 2. Edit your `settings.py:`
@@ -30,15 +30,27 @@ Usage
 	INSTALLED_APPS += ("zebra",)
 	STRIPE_SECRET = "YOUR-SECRET-API-KEY"
 	STRIPE_PUBLISHABLE = "YOUR-PUBLISHABLE-API-KEY"
+	
+	# Optional, if you want zebra's models enabled
+	ZEBRA_ENABLE_APP = True
 	```
 
-3. Enjoy.
+3. (optional) `./manage.py syncdb` if you have `ZEBRA_ENABLE_APP = True`
+
+4. (optional) Add in the webhook urls:
+	```
+	urlpatterns += patterns('',          
+		url(r'zebra/',   include('zebra.urls',  namespace="zebra",  app_name='zebra') ),
+	)
+	```
+
+5. Enjoy easy billing.
 
 
 
 ## Webhooks ##
 
-Zebra handling all the webhooks that stripe sends back and calls a set of signals that you can plug your app into.  To use the webhooks:
+Zebra handles all the webhooks that stripe sends back and calls a set of signals that you can plug your app into.  To use the webhooks:
 
 * Include the zebra urls
 * Update your stripe account to point to your webhook URL (aka https://www.mysite.com/zebra/webhooks)
@@ -78,7 +90,7 @@ zebra_webhook_recurring_payment_succeeded.connect(update_last_invoice_date)
 
 The StripePaymentForm sets up a form with fields like [the official stripe example](https://gist.github.com/1204718#file_stripe_tutorial_page.html).
 
-In particular, the form is stripped of the name attribute for any of the credit card fields, to prevent accidental submission.
+In particular, the form is stripped of the name attribute for any of the credit card fields, to prevent accidental submission. Media is also provided to set up stripe.js (it assumes you have jQuery).
 
 Use it in a view like so:
 
@@ -86,14 +98,14 @@ Use it in a view like so:
 if request.method == 'POST':
     zebra_form = StripePaymentForm(request.POST)
     if zebra_form.is_valid():
-        customer = stripe.Customer.retrieve(user.stripe_id)
-        customer.card = zebra_form.cleaned_data['stripe_token']
-        customer.save()
+        stripe_customer = stripe.Customer.retrieve(user.stripe_id)
+        stripe_customer.card = zebra_form.cleaned_data['stripe_token']
+        stripe_customer.save()
 
-        profile = user.get_profile()
-        profile.last_4_digits = zebra_form.cleaned_data['last_4_digits']
-        profile.stripe_customer_id = customer.id
-        profile.save()
+        customer = user.get_profile()
+        customer.last_4_digits = zebra_form.cleaned_data['last_4_digits']
+        customer.stripe_customer_id = stripe_customer.id
+        customer.save()
 
         # Do something kind for the user
 
@@ -124,7 +136,7 @@ That's it - all the stripe tokeny goodness happens, and errors are displayed to 
 
 ## Models and Mixins ##
 
-Model and Mixin docs coming.
+Model and Mixin docs coming.  For now, the code is pretty self-explanatory.
 
 
 ## Other Useful Bits ##
