@@ -1,5 +1,11 @@
 # Django settings for zebra_sample_project project.
 
+# Custom path to include zebra from this repo, intstead of pip installing itself.
+import sys
+from os.path import abspath, dirname, join
+sys.path.insert(0, join(abspath(dirname(__file__)), "../"))
+
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -63,10 +69,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # 'django.contrib.admin',
     # 'django.contrib.admindocs',
+    'django_extensions',
     'zebra',
-    'marty'
+    'marty',
+    
+
 )
-ZEBRA_ENABLE_APP = True
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -90,3 +98,22 @@ LOGGING = {
         },
     }
 }
+
+
+
+# Zebra Config
+ZEBRA_ENABLE_APP = True
+
+# Set these, or include them in an untracked locals.py
+STRIPE_PUBLISHABLE  = "pk_w53U8HN7FgUTjfsKqyPJu5P5g0WJl"
+STRIPE_SECRET       = "HFtji5tgdjiijU1kc7KRiCDQghfx8ugR"
+
+# STRIPE_PUBLISHABLE = None
+# STRIPE_SECRET = None
+
+# try:
+#     from locals import *
+# except:
+#     pass
+
+

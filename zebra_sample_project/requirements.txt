@@ -1,6 +1,8 @@
 pip > 1.0
+pycurl
 stripe
 django
 django-extensions
-# until it's stable.
--e git://github.com/GoodCloud/django-zebra.git#egg=zebra
+
+# we include it from the parent dir. You'll want to install it.
+# zebra

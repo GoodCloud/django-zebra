@@ -1,5 +1,5 @@
 from django import template
-from django.conf import settings
+from zebra.conf import settings
 register = template.Library()
 from django.utils.translation import ugettext as _
 from django.utils.encoding import force_unicode
@@ -11,6 +11,7 @@ def _set_up_zebra_form(context):
     if not "zebra_form" in context:
         if "form" in context:
             context["zebra_form"] = context["form"]
+            context["STRIPE_PUBLISHABLE"] = settings.STRIPE_PUBLISHABLE
         else:
             raise Exception, "Missing stripe form."
     return context
