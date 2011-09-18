@@ -16,6 +16,7 @@ except KeyError:
     STRIPE_SECRET = ''
 
 ZEBRA_ENABLE_APP = False
+ZEBRA_AUTO_CREATE_STRIPE_CUSTOMERS = True
 
 ZEBRA_TODAY = datetime.date.today()
 ZEBRA_CARD_YEARS = range(ZEBRA_TODAY.year, ZEBRA_TODAY.year+12)

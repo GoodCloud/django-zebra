@@ -30,9 +30,8 @@ Usage
 	INSTALLED_APPS += ("zebra",)
 	STRIPE_SECRET = "YOUR-SECRET-API-KEY"
 	STRIPE_PUBLISHABLE = "YOUR-PUBLISHABLE-API-KEY"
-	
-	# Optional, if you want zebra's models enabled
-	ZEBRA_ENABLE_APP = True
+
+	# Set any optional settings (below)
 	```
 
 3. (optional) `./manage.py syncdb` if you have `ZEBRA_ENABLE_APP = True`
@@ -47,6 +46,11 @@ Usage
 
 5. Enjoy easy billing.
 
+
+### Optional Settings:
+
+* `ZEBRA_ENABLE_APP` - Defaults to `False`.  Enables Customer, Plan, and Subscription django models, as a part of zebra.
+* `ZEBRA_AUTO_CREATE_STRIPE_CUSTOMERS` - Defaults to `True`.  Automatically creates a stripe customer obect on stripe_customer access, if one doesn't exist.
 
 
 ## Webhooks ##

@@ -1,5 +1,5 @@
 import stripe
-
+from zebra.conf import settings
 
 def _get_attr_value(instance, attr, default=None):
     """
@@ -57,8 +57,14 @@ class StripeCustomerMixin(object):
     to provide the customer id for the returned instance.
     """
     def _get_stripe_customer(self):
-        return self.stripe.Customer.retrieve(_get_attr_value(self,
+        c = self.stripe.Customer.retrieve(_get_attr_value(self,
                                         'stripe_customer_id'))
+        if not c and settings.ZEBRA_AUTO_CREATE_STRIPE_CUSTOMERS:
+            c = self.stripe.Customer.create()
+            self.stripe_customer_id = c.id
+            self.save()
+        else:
+            return c
     stripe_customer = property(_get_stripe_customer)
 
 
