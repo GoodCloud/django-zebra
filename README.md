@@ -66,6 +66,8 @@ zebra_webhook_recurring_payment_succeeded.connect(update_last_invoice_date)
 
 The StripePaymentForm sets up a form with fields like [the official stripe example](https://gist.github.com/1204718#file_stripe_tutorial_page.html).
 
+In particular, the form is stripped of the name attribute for any of the credit card fields, to prevent accidental submission.
+
 Use it in a view like so:
 
 ```

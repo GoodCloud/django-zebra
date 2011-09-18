@@ -11,9 +11,9 @@ def _set_up_zebra_form(context):
     if not "zebra_form" in context:
         if "form" in context:
             context["zebra_form"] = context["form"]
-            context["STRIPE_PUBLISHABLE"] = settings.STRIPE_PUBLISHABLE
         else:
             raise Exception, "Missing stripe form."
+    context["STRIPE_PUBLISHABLE"] = settings.STRIPE_PUBLISHABLE
     return context
 
 @register.inclusion_tag('zebra/_stripe_js_and_set_stripe_key.html', takes_context=True)
