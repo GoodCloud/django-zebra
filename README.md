@@ -21,11 +21,18 @@ Usage
 
 ## Installation ##
 
-* pip install (from here, for the moment): 
+1. `pip` install (from here, for the moment. pypi support coming with stability. ): 
 	`pip install -e git://github.com/GoodCloud/django-zebra.git#egg=zebra`
-* Add to `INSTALLED_APPS`
-* Add `STRIPE_SECRET` and `STRIPE_PUBLISHABLE` to your `settings.py`
-* Enjoy.
+
+2. Edit your `settings.py:`
+
+	```
+	INSTALLED_APPS += ("zebra",)
+	STRIPE_SECRET = "YOUR-SECRET-API-KEY"
+	STRIPE_PUBLISHABLE = "YOUR-PUBLISHABLE-API-KEY"
+	```
+
+3. Enjoy.
 
 
 
