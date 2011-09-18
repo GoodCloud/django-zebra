@@ -52,22 +52,26 @@ class StripeMixin(object):
 
 class StripeCustomerMixin(object):
     """
-    Provides a property `stripe` that returns an instance of the Stripe module &
-    additionally adds a property `stripe_customer` that returns a stripe
-    customer instance.
+    Provides a property property `stripe_customer` that returns a stripe
+    customer instance. 
     
-    Your class must have an attribute `stripe_customer_id` (method or property)
-    to provide the customer id for the returned instance.
+    Your class must provide:
+    - an attribute `stripe_customer_id` (method or property)
+      to provide the customer id for the returned instance, and 
+    - an attribute `stripe` (method or property) that returns an instance 
+      of the Stripe module. StripeMixin is an easy way to get this.
     """
     def _get_stripe_customer(self):
-        c = self.stripe.Customer.retrieve(_get_attr_value(self,
+        c = None
+        if _get_attr_value(self,'stripe_customer_id'):
+            c = self.stripe.Customer.retrieve(_get_attr_value(self,
                                         'stripe_customer_id'))
         if not c and settings.ZEBRA_AUTO_CREATE_STRIPE_CUSTOMERS:
             c = self.stripe.Customer.create()
             self.stripe_customer_id = c.id
             self.save()
-        else:
-            return c
+        
+        return c
     stripe_customer = property(_get_stripe_customer)
 
 
