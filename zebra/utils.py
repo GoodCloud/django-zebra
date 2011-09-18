@@ -15,7 +15,7 @@ def audit_customer_subscription(customer, unknown=True):
     else:
         if hasattr(customer, 'subscription'):
             try:
-                status = AUDIT_RESULTS[customer.subscription.status]
+                result = AUDIT_RESULTS[customer.subscription.status]
             except KeyError, err:
                 # TODO should this be a more specific exception class?
                 raise Exception("Unable to locate a result set for \
