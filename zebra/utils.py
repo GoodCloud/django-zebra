@@ -2,7 +2,7 @@ from zebra.conf import settings
 
 AUDIT_RESULTS = settings.ZEBRA_AUDIT_RESULTS
 
-def audit_customer_subscription(customer):
+def audit_customer_subscription(customer, unknown=True):
     """
     Audits the provided customer's subscription against stripe and returns a pair
     that contains a boolean and a result type.
@@ -11,10 +11,15 @@ def audit_customer_subscription(customer):
     overridden in your project's settings.
     """
     if (hasattr(customer, 'suspended') and customer.suspended):
-        result = (False, AUDIT_RESULTS['suspended'])
+        result = AUDIT_RESULTS['suspended']
     else:
-        if hasattr(customer, 'subscription') and customer.subscription.status == 'active':
-            result = (True, AUDIT_RESULTS['active'])
+        if hasattr(customer, 'subscription'):
+            try:
+                status = AUDIT_RESULTS[customer.subscription.status]
+            except KeyError, err:
+                # TODO should this be a more specific exception class?
+                raise Exception("Unable to locate a result set for \
+subscription status %s in settings.ZEBRA_AUDIT_RESULTS") % str(e)
         else:
-            result = (False, AUDIT_RESULTS['inactive'])
+            result = AUDIT_RESULTS['no_subscription']
     return result

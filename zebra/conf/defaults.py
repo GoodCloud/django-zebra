@@ -23,7 +23,10 @@ ZEBRA_CARD_YEARS_CHOICES = [(i,i) for i in ZEBRA_CARD_YEARS]
 ZEBRA_MAXIMUM_STRIPE_CUSTOMER_LIST_SIZE = 100
 
 ZEBRA_AUDIT_RESULTS = {
-    'suspended': 'suspended',
-    'active': 'active',
-    'inactive': 'inactive',
+    'active': (True, 'active'),
+    'no_subscription': (False, 'no_subscription'),
+    'past_due': (True, 'past_due'),
+    'suspended': (False, 'suspended'),
+    'trialing': (True, 'trialing'),
+    'unpaid': (False, 'cancelled')
 }
