@@ -105,15 +105,10 @@ LOGGING = {
 ZEBRA_ENABLE_APP = True
 
 # Set these, or include them in an untracked locals.py
-STRIPE_PUBLISHABLE  = "pk_w53U8HN7FgUTjfsKqyPJu5P5g0WJl"
-STRIPE_SECRET       = "HFtji5tgdjiijU1kc7KRiCDQghfx8ugR"
+STRIPE_PUBLISHABLE = None
+STRIPE_SECRET = None
 
-# STRIPE_PUBLISHABLE = None
-# STRIPE_SECRET = None
-
-# try:
-#     from locals import *
-# except:
-#     pass
-
-
+try:
+    from locals import *
+except:
+    pass
