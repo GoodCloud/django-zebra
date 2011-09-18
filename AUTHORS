@@ -1,6 +1,6 @@
 Basic ideas came from:
 
-Stripe's library: https://github.com/stripe/stripe-python/blob/master/LICENSE
+Stripe's library: https://github.com/stripe/stripe-python/
 Stripe's monospace sample app: https://github.com/stripe/monospace-django
 
 Code came from:
