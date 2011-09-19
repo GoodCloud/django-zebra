@@ -10,11 +10,6 @@ It's made of:
 
 Pull requests are quite welcome!
 
-Status
-======
-
-In active dev this weekend ( Sept 19, 2011 ).  Probably don't use it in production until monday.  This message will go away when that's changed.
-
 
 Usage
 =====
@@ -50,6 +45,7 @@ Usage
 ### Optional Settings:
 
 * `ZEBRA_ENABLE_APP` - Defaults to `False`.  Enables Customer, Plan, and Subscription django models, as a part of zebra.
+* `ZEBRA_CUSTOMER_MODEL` - the app + model string for a model that implements the StripeCustomerMixin, ie `myapp.MyCustomer`.  If `ZEBRA_ENABLE_APP` is true, defaults to `zebra.Customer`. 
 * `ZEBRA_AUTO_CREATE_STRIPE_CUSTOMERS` - Defaults to `True`.  Automatically creates a stripe customer obect on stripe_customer access, if one doesn't exist.
 
 
@@ -72,7 +68,7 @@ Zebra provides:
 
 All of the webhooks provide the same arguments:
 
-* `customer` - the stripe customer ID
+* `customer` - if `ZEBRA_CUSTOMER_MODEL` is set, returns an instance that matches the `stripe_customer_id`, or `None`.  If `ZEBRA_CUSTOMER_MODEL` is not set, returns `None`.
 * `full_json` - the full json response, parsed with simplejson.
 
 
@@ -141,7 +137,7 @@ That's it - all the stripe tokeny goodness happens, and errors are displayed to 
 
 ## Models and Mixins ##
 
-Model and Mixin docs coming.  For now, the code is pretty self-explanatory.
+Model and Mixin docs coming.  For now, the code is pretty self-explanatory, and decently documented.
 
 
 ## Other Useful Bits ##
@@ -152,7 +148,7 @@ Zebra comes with a manage.py command to clear out all the test customers from yo
 ./manage.py clear_stripe_test_customers
 ```
 
-It responds to `--verbosity=[0-3]`, like a lot of python scripts.
+It responds to `--verbosity=[0-3]`.
 
 
 Credits
