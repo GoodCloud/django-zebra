@@ -18,7 +18,7 @@ class Command(BaseCommand):
             print "Clearing stripe test customers:"
         
         num_checked = 0
-        while customer_chunk is not []:
+        while len(customer_chunk) is not 0:
             customer_chunk = stripe.Customer.all(count=CLEAR_CHUNK_SIZE, offset=num_checked).data
 
             if verbosity > 1:     
