@@ -140,7 +140,7 @@ That's it - all the stripe tokeny goodness happens, and errors are displayed to 
 
 ## Models and Mixins ##
 
-Model and Mixin docs coming.  For now, the code is pretty self-explanatory, and decently documented.
+Model and Mixin docs coming.  For now, the code is pretty self-explanatory, and decently documented inline.
 
 
 ## Other Useful Bits ##

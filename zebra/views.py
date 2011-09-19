@@ -2,15 +2,13 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponse
-try:
-    import simplejson
-except:
-    from django.utils import simplejson
+from django.utils import simplejson
+from django.db.models import get_model
 
 from zebra.conf import settings
 import stripe
 from zebra.signals import *
-from django.db.models import get_model
+
 
 
 stripe.api_key = settings.STRIPE_SECRET
