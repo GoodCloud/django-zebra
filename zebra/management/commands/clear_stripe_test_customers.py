@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from zebra.conf import settings 
 import stripe
 
-CLEAR_CHUNK_SIZE = ZEBRA_MAXIMUM_STRIPE_CUSTOMER_LIST_SIZE
+CLEAR_CHUNK_SIZE = settings.ZEBRA_MAXIMUM_STRIPE_CUSTOMER_LIST_SIZE
 
 
 class Command(BaseCommand):
