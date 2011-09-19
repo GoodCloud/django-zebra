@@ -44,9 +44,12 @@ Usage
 
 ### Optional Settings:
 
-* `ZEBRA_ENABLE_APP` - Defaults to `False`.  Enables Customer, Plan, and Subscription django models, as a part of zebra.
-* `ZEBRA_CUSTOMER_MODEL` - the app + model string for a model that implements the StripeCustomerMixin, ie `myapp.MyCustomer`.  If `ZEBRA_ENABLE_APP` is true, defaults to `zebra.Customer`. 
-* `ZEBRA_AUTO_CREATE_STRIPE_CUSTOMERS` - Defaults to `True`.  Automatically creates a stripe customer obect on stripe_customer access, if one doesn't exist.
+* `ZEBRA_ENABLE_APP` 
+	Defaults to `False`.  Enables Customer, Plan, and Subscription django models, as a part of zebra.
+* `ZEBRA_CUSTOMER_MODEL` 
+	The app+model string for the model that implements the StripeCustomerMixin. ie `"myapp.MyCustomer"`.  If `ZEBRA_ENABLE_APP` is true, defaults to `"zebra.Customer"`. 
+* `ZEBRA_AUTO_CREATE_STRIPE_CUSTOMERS` 
+	Defaults to `True`.  Automatically creates a stripe customer obect on stripe_customer access, if one doesn't exist.
 
 
 ## Webhooks ##
