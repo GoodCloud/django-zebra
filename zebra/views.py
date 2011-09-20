@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse
 from django.utils import simplejson
 from django.db.models import get_model
 
@@ -28,7 +28,7 @@ def webhooks(request):
     """Handles all known webhooks from stripe, and calls signals. Plug in as you need."""
 
     if request.method != "POST":
-        return HttpResponseBadRequest()
+        return HttpResponse("Invalid Request.", status=400)
         
     json = simplejson.loads(request.POST["json"])
 
