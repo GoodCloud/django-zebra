@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.utils import simplejson
 from django.db.models import get_model
 
@@ -27,7 +27,9 @@ def _try_to_get_customer_from_customer_id(stripe_customer_id):
 def webhooks(request):
     """Handles all known webhooks from stripe, and calls signals. Plug in as you need."""
 
-    assert request.method == "POST"
+    if request.method != "POST":
+        return HttpResponseBadRequest()
+        
     json = simplejson.loads(request.POST["json"])
 
     if json["event"] == "recurring_payment_failed":
