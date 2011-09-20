@@ -6,17 +6,21 @@ import os
 
 from django.conf import settings as _settings
 
-try:
-    STRIPE_PUBLISHABLE = getattr(_settings, 'STRIPE_PUBLISHABLE',
-        os.environ['STRIPE_PUBLISHABLE'])
-except KeyError:
-    STRIPE_PUBLISHABLE = ''
+if hasattr(_settings, 'STRIPE_PUBLISHABLE'):
+    STRIPE_PUBLISHABLE = getattr(_settings, 'STRIPE_PUBLISHABLE')
+else:
+    try:
+        STRIPE_PUBLISHABLE = os.environ['STRIPE_PUBLISHABLE']
+    except KeyError:
+        STRIPE_PUBLISHABLE = ''
 
-try:
-    STRIPE_SECRET = getattr(_settings, 'STRIPE_SECRET',
-        os.environ['STRIPE_SECRET'])
-except KeyError:
-    STRIPE_SECRET = ''
+if hasattr(_settings, 'STRIPE_SECRET'):
+    STRIPE_SECRET = getattr(_settings, 'STRIPE_SECRET')
+else:
+    try:
+        STRIPE_SECRET = os.environ['STRIPE_SECRET']
+    except KeyError:
+        STRIPE_SECRET = ''
 
 ZEBRA_ENABLE_APP = getattr(_settings, 'ZEBRA_ENABLE_APP', False)
 ZEBRA_AUTO_CREATE_STRIPE_CUSTOMERS = getattr(_settings,

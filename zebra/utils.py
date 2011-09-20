@@ -19,7 +19,7 @@ def audit_customer_subscription(customer, unknown=True):
             except KeyError, err:
                 # TODO should this be a more specific exception class?
                 raise Exception("Unable to locate a result set for \
-subscription status %s in ZEBRA_AUDIT_RESULTS") % str(e)
+subscription status %s in ZEBRA_AUDIT_RESULTS") % str(err)
         else:
             result = AUDIT_RESULTS['no_subscription']
     return result
