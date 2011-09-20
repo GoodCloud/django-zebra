@@ -1,5 +1,5 @@
 import stripe
-from zebra.conf import settings
+from zebra.conf import options
 
 def _get_attr_value(instance, attr, default=None):
     """
@@ -44,8 +44,8 @@ class StripeMixin(object):
     def _get_stripe(self):
         if hasattr(self, 'stripe_api_key'):
             stripe.api_key = _get_attr_value(self, 'stripe_api_key')
-        elif hasattr(settings, 'STRIPE_SECRET'):
-            stripe.api_key = _get_attr_value(settings, 'STRIPE_SECRET')
+        elif hasattr(options, 'STRIPE_SECRET'):
+            stripe.api_key = _get_attr_value(options, 'STRIPE_SECRET')
         return stripe
     stripe = property(_get_stripe)
 
@@ -66,7 +66,7 @@ class StripeCustomerMixin(object):
         if _get_attr_value(self,'stripe_customer_id'):
             c = self.stripe.Customer.retrieve(_get_attr_value(self,
                                         'stripe_customer_id'))
-        if not c and settings.ZEBRA_AUTO_CREATE_STRIPE_CUSTOMERS:
+        if not c and options.ZEBRA_AUTO_CREATE_STRIPE_CUSTOMERS:
             c = self.stripe.Customer.create()
             self.stripe_customer_id = c.id
             self.save()
