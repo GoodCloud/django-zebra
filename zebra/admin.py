@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from zebra.conf import settings
+from zebra.conf import options
 
-if settings.ZEBRA_ENABLE_APP:
+if options.ZEBRA_ENABLE_APP:
 
     from zebra.models import Customer, Plan, Subscription
     admin.site.register(Customer)

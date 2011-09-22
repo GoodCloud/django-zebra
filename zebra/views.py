@@ -1,21 +1,19 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response, redirect
-from django.template import RequestContext
 from django.http import HttpResponse
 from django.utils import simplejson
 from django.db.models import get_model
 
-from zebra.conf import settings
 import stripe
+
+from zebra.conf import options
 from zebra.signals import *
 
 
 
-stripe.api_key = settings.STRIPE_SECRET
+stripe.api_key = options.STRIPE_SECRET
 
 def _try_to_get_customer_from_customer_id(stripe_customer_id):
-    if hasattr(settings, "ZEBRA_CUSTOMER_MODEL"):
-        m = get_model(*settings.ZEBRA_CUSTOMER_MODEL.split('.'))
+    if options.ZEBRA_CUSTOMER_MODEL:
+        m = get_model(*options.ZEBRA_CUSTOMER_MODEL.split('.'))
         try:
             return m.objects.get(stripe_customer_id=stripe_customer_id)
         except:
@@ -26,7 +24,9 @@ def _try_to_get_customer_from_customer_id(stripe_customer_id):
 def webhooks(request):
     """Handles all known webhooks from stripe, and calls signals. Plug in as you need."""
 
-    assert request.method == "POST"
+    if request.method != "POST":
+        return HttpResponse("Invalid Request.", status=400)
+        
     json = simplejson.loads(request.POST["json"])
 
     if json["event"] == "recurring_payment_failed":
