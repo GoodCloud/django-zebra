@@ -15,6 +15,10 @@ class TestWebhooks(unittest.TestCase):
     def _signal_reciever(self, **kwargs):
         self.signal_kwargs = kwargs
 
+    def _customized_signal_reciever(self, customer, full_json, **kwargs):
+        self.customer = customer
+        self.full_json = full_json
+
     def test_recurring_payment_failed_signal_fired(self):
         zebra_webhook_recurring_payment_failed.connect(self._signal_reciever)
 
@@ -302,3 +306,40 @@ class TestWebhooks(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.signal_kwargs["customer"], cust)
+
+    def test_webhooks_return_valid_customer_obj_as_an_arg(self):
+        zebra_webhook_subscription_trial_ending.connect(self._customized_signal_reciever)
+
+        from zebra.models import Customer
+        cust = Customer.objects.create()
+        
+        # since ZEBRA_AUTO_CREATE_STRIPE_CUSTOMERS is on (default), this creates a customer
+        cust.stripe_customer
+
+        self.assertEqual(self.signal_kwargs, None)
+
+        # Pulled directly from the stripe docs
+        test_post_data = {'json': simplejson.dumps(
+            {
+              "customer":cust.stripe_customer_id,
+              "event":"subscription_trial_ending",
+              "subscription":
+              {
+                "trial_start": 1304627445,
+                "trial_end": 1307305845,
+                "plan": {
+                  "trial_period_days": 31,
+                  "amount": 2999,
+                  "interval": "month",
+                  "id": "silver",
+                  "name": "Silver"
+                },
+              }
+            }      
+        ) }
+
+        c = Client()
+        response = c.post(reverse("zebra:webhooks"), test_post_data)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.customer, cust)
