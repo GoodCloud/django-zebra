@@ -4,10 +4,10 @@ from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponse
 from django.utils import simplejson
-from zebra.conf import settings
+from zebra.conf import options
 
 import stripe
-stripe.api_key = settings.STRIPE_SECRET
+stripe.api_key = options.STRIPE_SECRET
 
 from zebra.forms import StripePaymentForm
 
@@ -38,7 +38,7 @@ def update(request):
     return render_to_response('marty/basic_update.html',
         {
           'zebra_form': zebra_form,
-          'publishable': settings.STRIPE_PUBLISHABLE,
+          'publishable': options.STRIPE_PUBLISHABLE,
           'success_updating': success_updating,
         },
         context_instance=RequestContext(request)

@@ -1,5 +1,5 @@
 from django import template
-from zebra.conf import settings
+from zebra.conf import options
 register = template.Library()
 from django.utils.translation import ugettext as _
 from django.utils.encoding import force_unicode
@@ -13,7 +13,7 @@ def _set_up_zebra_form(context):
             context["zebra_form"] = context["form"]
         else:
             raise Exception, "Missing stripe form."
-    context["STRIPE_PUBLISHABLE"] = settings.STRIPE_PUBLISHABLE
+    context["STRIPE_PUBLISHABLE"] = options.STRIPE_PUBLISHABLE
     return context
 
 @register.inclusion_tag('zebra/_stripe_js_and_set_stripe_key.html', takes_context=True)

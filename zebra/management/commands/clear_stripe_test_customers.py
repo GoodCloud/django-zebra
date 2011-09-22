@@ -1,8 +1,8 @@
 from django.core.management.base import BaseCommand
-from zebra.conf import settings 
+from zebra.conf import options as zoptions
 import stripe
 
-CLEAR_CHUNK_SIZE = settings.ZEBRA_MAXIMUM_STRIPE_CUSTOMER_LIST_SIZE
+CLEAR_CHUNK_SIZE = zoptions.ZEBRA_MAXIMUM_STRIPE_CUSTOMER_LIST_SIZE
 
 
 class Command(BaseCommand):
@@ -11,7 +11,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         verbosity = int(options.get('verbosity', 1))
-        stripe.api_key = settings.STRIPE_SECRET
+        stripe.api_key = zoptions.STRIPE_SECRET
         customer_chunk = [0]
 
         if verbosity > 0:
