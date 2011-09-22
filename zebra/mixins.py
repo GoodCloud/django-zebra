@@ -1,5 +1,7 @@
 import stripe
+
 from zebra.conf import options
+
 
 def _get_attr_value(instance, attr, default=None):
     """

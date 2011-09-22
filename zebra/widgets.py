@@ -1,5 +1,6 @@
-from django.forms.widgets import TextInput, Select
+from django.forms.widgets import Select, TextInput
 from django.utils.safestring import mark_safe
+
 
 class NoNameWidget(object):
     
@@ -22,6 +23,7 @@ class NoNameWidget(object):
             'all': ('zebra/card-form.css',)
         }
         js = ('zebra/card-form.js','https://js.stripe.com/v1/')
+
 
 class NoNameTextInput(TextInput, NoNameWidget):
 

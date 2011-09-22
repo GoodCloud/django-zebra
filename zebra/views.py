@@ -8,7 +8,6 @@ from zebra.conf import options
 from zebra.signals import *
 
 
-
 stripe.api_key = options.STRIPE_SECRET
 
 def _try_to_get_customer_from_customer_id(stripe_customer_id):
@@ -22,7 +21,10 @@ def _try_to_get_customer_from_customer_id(stripe_customer_id):
 
 
 def webhooks(request):
-    """Handles all known webhooks from stripe, and calls signals. Plug in as you need."""
+    """
+    Handles all known webhooks from stripe, and calls signals.
+    Plug in as you need.
+    """
 
     if request.method != "POST":
         return HttpResponse("Invalid Request.", status=400)
