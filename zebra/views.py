@@ -5,12 +5,8 @@ import stripe
 from zebra.conf import options
 from zebra.signals import *
 
-<<<<<<< HEAD
 
-=======
->>>>>>> master
 stripe.api_key = options.STRIPE_SECRET
-
 
 def _try_to_get_customer_from_customer_id(stripe_customer_id):
     if options.ZEBRA_CUSTOMER_MODEL:
