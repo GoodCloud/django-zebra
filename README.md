@@ -77,13 +77,14 @@ All of the webhooks provide the same arguments:
 
 So, for example, to update the customer's new billing date after a successful payment, you could:
 
+(assuming you've set `ZEBRA_CUSTOMER_MODEL` or are using `ZEBRA_ENABLE_APP`):
+
 ```
 from zebra.signals import zebra_webhook_recurring_payment_succeeded
 
-def update_last_invoice_date(sender, **kwargs):
-	c = Customer.objects.get(stripe_customer_id=kwargs["customer"])
-	c.billing_date = kwargs["full_json"].date
-	c.save()
+def update_last_invoice_date(sender, customer, full_json, **kwargs):
+	customer.billing_date = full_json.date
+	customer.save()
 
 zebra_webhook_recurring_payment_succeeded.connect(update_last_invoice_date)
 ```

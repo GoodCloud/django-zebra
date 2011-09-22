@@ -1,14 +1,16 @@
 from django.http import HttpResponse
 from django.utils import simplejson
 from django.db.models import get_model
-
 import stripe
-
 from zebra.conf import options
 from zebra.signals import *
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 stripe.api_key = options.STRIPE_SECRET
+
 
 def _try_to_get_customer_from_customer_id(stripe_customer_id):
     if options.ZEBRA_CUSTOMER_MODEL:
@@ -28,7 +30,7 @@ def webhooks(request):
 
     if request.method != "POST":
         return HttpResponse("Invalid Request.", status=400)
-        
+
     json = simplejson.loads(request.POST["json"])
 
     if json["event"] == "recurring_payment_failed":
@@ -45,9 +47,8 @@ def webhooks(request):
 
     elif json["event"] == "subscription_final_payment_attempt_failed":
         zebra_webhook_subscription_final_payment_attempt_failed.send(sender=None, customer=_try_to_get_customer_from_customer_id(json["customer"]), full_json=json)
-    
+
     else:
         return HttpResponse(status=400)
 
     return HttpResponse(status=200)
-    

@@ -10,7 +10,6 @@ from zebra.conf import options
 
 register = template.Library()
 
-
 def _set_up_zebra_form(context):
     if not "zebra_form" in context:
         if "form" in context:
