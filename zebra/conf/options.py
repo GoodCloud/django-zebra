@@ -55,4 +55,4 @@ ZEBRA_INACTIVE_STATUSES = getattr(_settings, 'ZEBRA_INACTIVE_STATUSES',
 if ZEBRA_ENABLE_APP:
     ZEBRA_CUSTOMER_MODEL = getattr(_settings, 'ZEBRA_CUSTOMER_MODEL', 'zebra.Customer')
 else:
-    ZEBRA_CUSTOMER_MODEL = getattr(_settings, 'ZEBRA_CUSTOMER_MODEL', '')
+    ZEBRA_CUSTOMER_MODEL = getattr(_settings, 'ZEBRA_CUSTOMER_MODEL', None)
