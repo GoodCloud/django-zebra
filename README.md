@@ -75,7 +75,9 @@ All of the webhooks provide the same arguments:
 * `full_json` - the full json response, parsed with simplejson.
 
 
-So, for example, to update the customer's new billing date after a successful payment, you could (assuming you've set ZEBRA_CUSTOMER_MODEL or are using ZEBRA_ENABLE_APP):
+So, for example, to update the customer's new billing date after a successful payment, you could:
+
+(assuming you've set `ZEBRA_CUSTOMER_MODEL` or are using `ZEBRA_ENABLE_APP`):
 
 ```
 from zebra.signals import zebra_webhook_recurring_payment_succeeded
