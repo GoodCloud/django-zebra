@@ -91,6 +91,8 @@ class StripeSubscriptionMixin(object):
         customer = _get_attr_value(self, 'stripe_customer')
         if hasattr(customer, 'subscription'):
             subscription = customer.subscription
+        elif "subscription" in customer:
+            subscription = customer["subscription"]
         return subscription
     stripe_subscription = property(_get_stripe_subscription)
 
