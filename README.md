@@ -82,7 +82,8 @@ So, for example, to update the customer's new billing date after a successful pa
 ```
 from zebra.signals import zebra_webhook_recurring_payment_succeeded
 
-def update_last_invoice_date(sender, customer, full_json, **kwargs):
+def update_last_invoice_date(sender, **kwargs):
+	customer = kwargs["customer"]
 	customer.billing_date = full_json.date
 	customer.save()
 

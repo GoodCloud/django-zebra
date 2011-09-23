@@ -15,9 +15,9 @@ class TestWebhooks(unittest.TestCase):
     def _signal_reciever(self, **kwargs):
         self.signal_kwargs = kwargs
 
-    def _customized_signal_reciever(self, customer, full_json, **kwargs):
-        self.customer = customer
-        self.full_json = full_json
+    def _customized_signal_reciever(self, **kwargs):
+        self.customer = kwargs["customer"]
+        self.full_json = kwargs["full_json"]
 
     def test_recurring_payment_failed_signal_fired(self):
         zebra_webhook_recurring_payment_failed.connect(self._signal_reciever)
