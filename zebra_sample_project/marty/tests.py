@@ -343,3 +343,23 @@ class TestWebhooks(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.customer, cust)
+
+      
+ 
+
+    def test_ping_webhook_signal_fired(self):
+        zebra_webhook_subscription_ping_sent.connect(self._signal_reciever)
+
+        self.assertEqual(self.signal_kwargs, None)
+
+        # Pulled directly from the stripe docs
+        test_post_data = {'json': simplejson.dumps(
+            {
+              "event":"ping",
+            }        
+        ) }
+
+        c = Client()
+        response = c.post(reverse("zebra:webhooks"), test_post_data)
+
+        self.assertEqual(response.status_code, 200)
