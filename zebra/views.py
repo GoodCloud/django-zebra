@@ -4,6 +4,7 @@ from django.db.models import get_model
 import stripe
 from zebra.conf import options
 from zebra.signals import *
+from django.views.decorators.csrf import csrf_exempt
 
 
 stripe.api_key = options.STRIPE_SECRET
@@ -17,7 +18,7 @@ def _try_to_get_customer_from_customer_id(stripe_customer_id):
             pass
     return None
 
-
+@csrf_exempt
 def webhooks(request):
     """
     Handles all known webhooks from stripe, and calls signals.
