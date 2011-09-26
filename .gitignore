@@ -8,3 +8,4 @@ zebra_sample_project/zebra_sample.db
 zebra_sample_project/locals.py
 django_zebra.egg-info/*
 dist/*
+build/*

@@ -11,9 +11,10 @@ setup(
     author = "Steven Skoczen",
     author_email = "steven@agoodcloud.com",
     url = "https://github.com/GoodCloud/django-zebra",
-    version = "0.4",
+    version = "0.4.2",
     packages = find_packages(),
     zip_safe = False,
+    include_package_data=True,
     classifiers = [
         "Programming Language :: Python",
         "License :: OSI Approved :: MIT License",

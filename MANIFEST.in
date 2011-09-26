@@ -1,0 +1,4 @@
+include README.md AUTHORS LICENSE
+recursive-include zebra/templates/zebra *
+recursive-include zebra/static/zebra *
+recursive-include zebra_sample_project/marty/templates/marty *
