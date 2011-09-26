@@ -16,8 +16,7 @@ Usage
 
 ## Installation ##
 
-1. `pip` install (from here, for the moment. pypi support coming soon. ): 
-	`pip install -e git://github.com/GoodCloud/django-zebra.git#egg=zebra`
+1. `pip install django-zebra`
 
 2. Edit your `settings.py:`
 
