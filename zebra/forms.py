@@ -17,6 +17,14 @@ class CardForm(MonospaceForm):
 
 
 class StripePaymentForm(CardForm):
+    def __init__(self, *args, **kwargs):
+        super(StripePaymentForm, self).__init__(*args, **kwargs)
+        self.fields['card_cvv'].label = "Card CVV"
+        self.fields['card_cvv'].help_text = "Card Verification Code; see rear of card."
+        months = [ (m[0], u'%02d - %s' % (m[0], unicode(m[1])))
+                    for m in sorted(MONTHS.iteritems()) ]
+        self.fields['card_expiry_month'].choices = months
+
     card_number = forms.CharField(required=False, max_length=20, widget=NoNameTextInput())
     card_cvv = forms.CharField(required=False, max_length=4,  widget=NoNameTextInput())
     card_expiry_month = forms.ChoiceField(required=False, widget=NoNameSelect(), choices=MONTHS.iteritems())
