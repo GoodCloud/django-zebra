@@ -103,14 +103,14 @@ Use it in a view like so:
 if request.method == 'POST':
     zebra_form = StripePaymentForm(request.POST)
     if zebra_form.is_valid():
-        stripe_customer = stripe.Customer.retrieve(user.stripe_id)
+    	my_profile = request.user.get_profile()
+        stripe_customer = stripe.Customer.retrieve(my_profile.stripe_customer_id)
         stripe_customer.card = zebra_form.cleaned_data['stripe_token']
         stripe_customer.save()
 
-        customer = user.get_profile()
-        customer.last_4_digits = zebra_form.cleaned_data['last_4_digits']
-        customer.stripe_customer_id = stripe_customer.id
-        customer.save()
+        my_profile.last_4_digits = zebra_form.cleaned_data['last_4_digits']
+        my_profile.stripe_customer_id = stripe_customer.id
+        my_profile.save()
 
         # Do something kind for the user
 
