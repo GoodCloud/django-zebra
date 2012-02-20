@@ -6,6 +6,8 @@ from zebra.conf import options
 from zebra.signals import *
 from django.views.decorators.csrf import csrf_exempt
 
+import logging
+log = logging.getLogger("zebra.%s" % __name__)
 
 stripe.api_key = options.STRIPE_SECRET
 
@@ -50,5 +52,22 @@ def webhooks(request):
 
     else:
         return HttpResponse(status=400)
+
+    return HttpResponse(status=200)
+
+@csrf_exempt
+def webhooks_v2(request):
+    """
+    Handles all known webhooks from stripe, and calls signals.
+    Plug in as you need.
+    """
+    if request.method != "POST":
+        return HttpResponse("Invalid Request.", status=400)
+
+    event_json = simplejson.loads(request.raw_post_data)
+    event_key = event_json['type'].replace('.', '_')
+
+    if event_key in WEBHOOK_MAP:
+        WEBHOOK_MAP[event_key].send(sender=None, full_json=event_json)
 
     return HttpResponse(status=200)
