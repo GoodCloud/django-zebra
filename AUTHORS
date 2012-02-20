@@ -8,5 +8,7 @@ Code came from:
 Steven Skoczen, GoodCloud http://www.agoodcloud.com
 Lee Trout, http://www.leetrout.com
 
+
 Pulls from:
-mixmastamyk
+Minor cleanups - [mixmastamyk](https://github.com/sivy)
+Implementation of v2 webhooks from stripe - [Steve Ivy](https://github.com/sivy)
