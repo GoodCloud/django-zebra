@@ -58,10 +58,12 @@ class StripeCustomerMixin(object):
     customer instance.
 
     Your class must provide:
+    
     - an attribute `stripe_customer_id` (method or property)
       to provide the customer id for the returned instance, and
     - an attribute `stripe` (method or property) that returns an instance
       of the Stripe module. StripeMixin is an easy way to get this.
+    
     """
     def _get_stripe_customer(self):
         c = None
