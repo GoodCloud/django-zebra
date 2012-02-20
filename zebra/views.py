@@ -56,7 +56,7 @@ def webhooks(request):
     return HttpResponse(status=200)
 
 @csrf_exempt
-def webhooks2(request):
+def webhooks_v2(request):
     """
     Handles all known webhooks from stripe, and calls signals.
     Plug in as you need.

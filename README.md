@@ -94,7 +94,7 @@ zebra_webhook_recurring_payment_succeeded.connect(update_last_invoice_date)
 Stripe recently updated their webhok implementation (see https://stripe.com/blog/webhooks). Zebra includes an implementation of the new system.
 
 * Include the zebra urls
-* Update your stripe account to point to your webhook URL (aka https://www.mysite.com/zebra/webhooks2)
+* Update your stripe account to point to your webhook URL (aka https://www.mysite.com/zebra/webhooks/v2/)
 * Plug into any webhook signals you care about.  
 
 Zebra provides:
