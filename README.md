@@ -24,9 +24,8 @@ Usage
 	INSTALLED_APPS += ("zebra",)
 	STRIPE_SECRET = "YOUR-SECRET-API-KEY"
 	STRIPE_PUBLISHABLE = "YOUR-PUBLISHABLE-API-KEY"
-
-	# Set any optional settings (below)
-	```
+    # Set any optional settings (below)
+    ```
 
 3. (optional) `./manage.py syncdb` if you have `ZEBRA_ENABLE_APP = True`
 
@@ -59,6 +58,7 @@ Zebra handles all the webhooks that stripe sends back and calls a set of signals
 * Update your stripe account to point to your webhook URL (aka https://www.mysite.com/zebra/webhooks)
 * Plug into any webhook signals you care about.  
 
+**Note: The initial Stripe webhook system is being deprecated. See below for a description of Zebra's support for the new system.**
 
 Zebra provides:
 
@@ -89,6 +89,51 @@ def update_last_invoice_date(sender, **kwargs):
 zebra_webhook_recurring_payment_succeeded.connect(update_last_invoice_date)
 ```
 
+### Webhooks Update ###
+
+Stripe recently updated their webhok implementation (see https://stripe.com/blog/webhooks). Zebra includes an implementation of the new system.
+
+* Include the zebra urls
+* Update your stripe account to point to your webhook URL (aka https://www.mysite.com/zebra/webhooks/v2/)
+* Plug into any webhook signals you care about.  
+
+Zebra provides:
+
+* `zebra_webhook_charge_succeeded`
+* `zebra_webhook_charge_failed`
+* `zebra_webhook_charge_refunded`
+* `zebra_webhook_charge_disputed`
+* `zebra_webhook_customer_created`
+* `zebra_webhook_customer_updated`
+* `zebra_webhook_customer_deleted`
+* `zebra_webhook_customer_subscription_created`
+* `zebra_webhook_customer_subscription_updated`
+* `zebra_webhook_customer_subscription_deleted`
+* `zebra_webhook_customer_subscription_trial_will_end`
+* `zebra_webhook_customer_discount_created`
+* `zebra_webhook_customer_discount_updated`
+* `zebra_webhook_customer_discount_deleted`
+* `zebra_webhook_invoice_created`
+* `zebra_webhook_invoice_updated`
+* `zebra_webhook_invoice_payment_succeeded`
+* `zebra_webhook_invoice_payment_failed`
+* `zebra_webhook_invoiceitem_created`
+* `zebra_webhook_invoiceitem_updated`
+* `zebra_webhook_invoiceitem_deleted`
+* `zebra_webhook_plan_created`
+* `zebra_webhook_plan_updated`
+* `zebra_webhook_plan_deleted`
+* `zebra_webhook_coupon_created`
+* `zebra_webhook_coupon_updated`
+* `zebra_webhook_coupon_deleted`
+* `zebra_webhook_transfer_created`
+* `zebra_webhook_transfer_failed`
+* `zebra_webhook_ping`
+
+Zebra also provides an easy map of all the signals as `zebra.signals.WEBHOOK_MAP`, which maps events (`charge_succeeded`) to the Zebra signal (`zebra_webhook_charge_succeeded`). To assign a handler to all the signals that zebra sends, for example, loop over the items in the map:
+
+    for event_key, webhook_signal in WEBHOOK_MAP.iteritems():
+        webhook_signal.connect(webhook_logger)
 
 
 ## Forms ##
