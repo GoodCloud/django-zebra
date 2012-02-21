@@ -1,3 +1,5 @@
+.. py:module:: zebra.models
+
 zebra.models
 ============
 

@@ -1,3 +1,5 @@
+.. py:module:: zebra.mixins
+
 zebra.mixins
 ============
 

@@ -1,10 +1,11 @@
+.. py:module:: zebra.config.options
+
 Configuration
 =============
 
 There are several options for Zebra. To override any of these options simply
 add them to your ``settings.py`` with the value your desire.
 
-.. py:module:: zebra.config.options
 
 -------------------------------------------------------------------------------
 

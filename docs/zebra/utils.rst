@@ -1,3 +1,5 @@
+.. py:module:: zebra.utils
+
 zebra.utils
 ===========
 

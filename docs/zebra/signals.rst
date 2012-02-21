@@ -1,3 +1,5 @@
+.. py:module:: zebra.signals
+
 zebra.signals
 =============
 
