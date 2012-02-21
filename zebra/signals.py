@@ -1,3 +1,13 @@
+"""
+Provides the following signals:
+
+- zebra_webhook_recurring_payment_failed
+- zebra_webhook_invoice_ready
+- zebra_webhook_recurring_payment_succeeded
+- zebra_webhook_subscription_trial_ending
+- zebra_webhook_subscription_final_payment_attempt_failed
+- zebra_webhook_subscription_ping_sent
+"""
 import django.dispatch
 
 
