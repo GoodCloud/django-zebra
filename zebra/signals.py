@@ -1,3 +1,48 @@
+"""
+Provides the following signals:
+
+V1
+
+- zebra_webhook_recurring_payment_failed
+- zebra_webhook_invoice_ready
+- zebra_webhook_recurring_payment_succeeded
+- zebra_webhook_subscription_trial_ending
+- zebra_webhook_subscription_final_payment_attempt_failed
+- zebra_webhook_subscription_ping_sent
+
+v2
+
+- zebra_webhook_charge_succeeded
+- zebra_webhook_charge_failed
+- zebra_webhook_charge_refunded
+- zebra_webhook_charge_disputed
+- zebra_webhook_customer_created
+- zebra_webhook_customer_updated
+- zebra_webhook_customer_deleted
+- zebra_webhook_customer_subscription_created
+- zebra_webhook_customer_subscription_updated
+- zebra_webhook_customer_subscription_deleted
+- zebra_webhook_customer_subscription_trial_will_end
+- zebra_webhook_customer_discount_created
+- zebra_webhook_customer_discount_updated
+- zebra_webhook_customer_discount_deleted
+- zebra_webhook_invoice_created
+- zebra_webhook_invoice_updated
+- zebra_webhook_invoice_payment_succeeded
+- zebra_webhook_invoice_payment_failed
+- zebra_webhook_invoiceitem_created
+- zebra_webhook_invoiceitem_updated
+- zebra_webhook_invoiceitem_deleted
+- zebra_webhook_plan_created
+- zebra_webhook_plan_updated
+- zebra_webhook_plan_deleted
+- zebra_webhook_coupon_created
+- zebra_webhook_coupon_updated
+- zebra_webhook_coupon_deleted
+- zebra_webhook_transfer_created
+- zebra_webhook_transfer_failed
+- zebra_webhook_ping
+"""
 import django.dispatch
 
 WEBHOOK_ARGS = ["customer", "full_json"]
