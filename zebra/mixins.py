@@ -147,7 +147,7 @@ class StripeChargeMixin(object):
     additionally adds a property `stripe_charge` that returns a stripe
     invoice item instance.
 
-    Your class must have an attribute `stripe_invoice_item_id` (method or
+    Your class must have an attribute `stripe_charge_id` (method or
     property) to provide the invoice id for the returned instance.
     """
     def _get_stripe_charge(self):
