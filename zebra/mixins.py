@@ -98,8 +98,7 @@ class StripeSubscriptionMixin(object):
 
 class StripePlanMixin(object):
     """
-    Provides a property `stripe_plan` that returns a stripe plan
-    instance.
+    Provides a property `stripe_plan` that returns a stripe plan instance.
 
     Your class must have an attribute `stripe_plan_id` (method or property)
     to provide the plan id for the returned instance.
@@ -111,8 +110,7 @@ class StripePlanMixin(object):
 
 class StripeInvoiceMixin(object):
     """
-    Provides a property `stripe_invoice` that returns a stripe invoice
-    instance.
+    Provides a property `stripe_invoice` that returns a stripe invoice instance.
 
     Your class must have an attribute `stripe_invoice_id` (method or property)
     to provide the invoice id for the returned instance.
@@ -132,7 +130,7 @@ class StripeInvoiceItemMixin(object):
     property) to provide the invoice id for the returned instance.
     """
     def _get_stripe_invoice_item(self):
-        return stripe.Invoice.retrieve(_get_attr_value(self,
+        return stripe.InvoiceItem.retrieve(_get_attr_value(self,
                                                     'stripe_invoice_item_id'))
     stripe_invoice_item = property(_get_stripe_invoice_item)
 
