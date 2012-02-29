@@ -129,7 +129,7 @@ class StripeInvoiceMixin(object):
 class StripeInvoiceItemMixin(object):
     """
     Provides a property `stripe` that returns an instance of the Stripe module &
-    additionally adds a property `stripe_invoice_item` that returns a stripe
+    additionally adds a property `stripe_invoice` that returns a stripe
     invoice item instance.
 
     Your class must have an attribute `stripe_invoice_item_id` (method or
@@ -144,7 +144,7 @@ class StripeInvoiceItemMixin(object):
 class StripeChargeMixin(object):
     """
     Provides a property `stripe` that returns an instance of the Stripe module &
-    additionally adds a property `stripe_invoice_item` that returns a stripe
+    additionally adds a property `stripe_charge` that returns a stripe
     invoice item instance.
 
     Your class must have an attribute `stripe_invoice_item_id` (method or
