@@ -122,7 +122,7 @@ Now ``YourCustomerModel`` will have 2 new attributes, ``stripe`` and
 decided to go this route, simply replace ``zebra.models.Customer`` with
 ``your_app.models.YourCustomerModel`` in the examples below.
 
-By defualt ``ZEBRA_AUTO_CREATE_STRIPE_CUSTOMERS`` is ``True`` so creating new
+By default ``ZEBRA_AUTO_CREATE_STRIPE_CUSTOMERS`` is ``True`` so creating new
 customers is a breeze by simply using the mixed-in helper. Simply instantiate
 your customer class and access the ``stripe_customer`` attribute.
 
