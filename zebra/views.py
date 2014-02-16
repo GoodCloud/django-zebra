@@ -1,5 +1,9 @@
 from django.http import HttpResponse
-from django.utils import simplejson
+try:
+    import json as simplejson
+except:
+    from django.utils import simplejson
+    
 from django.db.models import get_model
 import stripe
 from zebra.conf import options
